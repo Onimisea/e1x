@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1"
+		/>
+		<title>Login | Affiliate Center | E-DoubleOne Academy</title>
+		<meta name="robots" content="index, follow" />
+		<meta
+			name="description"
+			content="The best affiliate program from the best online learning platform."
+		/>
+		<meta name="keywords" content="E1xacademy" />
+		<meta name="author" content="Onimisea" />
+
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+		/>
+
+		<link
+			href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
+			rel="stylesheet"
+		/>
+
+		<link
+			rel="shortcut icon"
+			href="pr/assets/imgs/cropped-favicon.fw_-32x32.png"
+			type="image/x-icon"
+			style="background-color: white"
+		/>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<link rel="stylesheet" href="pr/assets/css/login.css" />
+	</head>
+
+	<body>
+		<?php include "pr/partials/sidebar1.html";?>
+
+		<main>
+			<?php include "pr/partials/header1.html";?>
+
+			<section class="body">
+				<section class="mainContent">
+					<section class="gridItem">
+						<h1>Earn 45% On Their Registration</h1>
+						<p>Yes, you get 45% when they complete their registration.</p>
+
+						<a class="ctaBtn" href="signup">Don't have an account? Sign Up</a>
+					</section>
+
+					<section class="gridItem">
+						<h1>Login</h1>
+						<form action="" method="post">
+							<label for="usrema">
+								<input
+									type="text"
+									name="usrema"
+									id="usrema"
+									placeholder="Username or Email *"
+									required
+									class="form-ctrl"
+								/>
+							</label>
+
+							<label for="password">
+								<input
+									type="password"
+									name="password"
+									id="password"
+									placeholder="Password *"
+									required
+									class="form-ctrl"
+								/>
+								<i class="fa fa-low-vision" id="spi"></i>
+							</label>
+
+							<input
+								type="submit"
+								name="submit"
+								id="submit"
+								value="LOGIN"
+								class="ctaBtn2"
+							/>
+
+							<a class="fp" href="#">Forgotten password?</a>
+						</form>
+					</section>
+				</section>
+			</section>
+
+			<?php include "pr/partials/footer1.html";?>
+		</main>
+
+		<script src="pr/assets/js/login.js" type="module"></script>
+	</body>
+</html>
+

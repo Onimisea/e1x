@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1"
+		/>
+		<title>Sign Up | Affiliate Center | E-DoubleOne Academy</title>
+		<meta name="robots" content="index, follow" />
+		<meta
+			name="description"
+			content="The best affiliate program from the best online learning platform."
+		/>
+		<meta name="keywords" content="E1xacademy" />
+		<meta name="author" content="Onimisea" />
+
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+		/>
+
+		<link
+			href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
+			rel="stylesheet"
+		/>
+
+		<link
+			rel="shortcut icon"
+			href="pr/assets/imgs/cropped-favicon.fw_-32x32.png"
+			type="image/x-icon"
+			style="background-color: white"
+		/>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<link rel="stylesheet" href="pr/assets/css/signup.css" />
+	</head>
+
+	<body>
+		<?php include "pr/partials/sidebar1.html";?>
+
+		<main>
+			<?php include "pr/partials/header1.html";?>
+
+			<section class="body">
+				<section class="mainContent">
+					<section class="gridItem">
+						<h1>Earn 45% On Their Registration</h1>
+						<p>Yes, you get 45% when they complete their registration.</p>
+
+						<a class="ctaBtn" href="login">Already have an account? Sign In</a>
+					</section>
+
+					<section class="gridItem">
+						<h1>Register</h1>
+
+						<section class="alertBox" id="alertBox"></section>
+
+						<form action="" method="post">
+							<label for="firstname">
+								<input
+									type="text"
+									name="firstname"
+									id="firstname"
+									placeholder="First Name *"
+									required
+									class="form-ctrl"
+								/>
+							</label>
+
+							<label for="lastname">
+								<input
+									type="text"
+									name="lastname"
+									id="lastname"
+									placeholder="Last Name *"
+									required
+									class="form-ctrl"
+								/>
+							</label>
+
+							<label for="phone">
+								<input
+									type="tel"
+									name="phone"
+									id="phone"
+									placeholder="Phone/Mobile *"
+									required
+									class="form-ctrl"
+								/>
+							</label>
+
+							<label for="username">
+								<input
+									type="text"
+									name="username"
+									id="username"
+									placeholder="Username *"
+									required
+									class="form-ctrl"
+								/>
+							</label>
+
+							<label for="email">
+								<input
+									type="email"
+									name="email"
+									id="email"
+									placeholder="Email *"
+									required
+									class="form-ctrl"
+								/>
+							</label>
+
+							<label for="password">
+								<input
+									type="password"
+									name="password"
+									id="password"
+									placeholder="Password *"
+									required
+									class="form-ctrl"
+								/>
+								<i class="fa fa-low-vision" id="spi1"></i>
+							</label>
+
+							<label for="confirm-password">
+								<input
+									type="password"
+									name="confirm-password"
+									id="confirm-password"
+									placeholder="Confirm Password *"
+									required
+									class="form-ctrl"
+								/>
+								<i class="fa fa-low-vision" id="spi2"></i>
+							</label>
+
+							<label for="referral-code">
+								<input
+									type="text"
+									name="referral-code"
+									id="referral-code"
+									placeholder="Referral Code/ID *"
+									class="form-ctrl"
+								/>
+							</label>
+
+							<label for="reward-program">
+								<select
+									name="reward-program"
+									id="reward-program"
+									required
+									class="form-ctrl"
+								>
+									<option value="null">Choose Reward Programme</option>
+									<option value="Exclusive Cash">Exclusive Cash</option>
+									<option value="Cash 'N' Qualify">Cash 'N' Qualify</option>
+								</select>
+							</label>
+
+							<label for="country">
+								<select name="country" id="country" required class="form-ctrl">
+									<option value="null">Choose Country</option>
+									<option value="Nigeria">Nigeria ($20)</option>
+									<option value="Others Countries">
+										Others Countries ($50)
+									</option>
+								</select>
+							</label>
+
+							<small class="fp"
+								>If you being referred by any agent kindly input their ID, or
+								leave blank for non.
+							</small>
+
+							<input
+								type="submit"
+								name="submit"
+								id="submit"
+								value="CREATE ACCOUNT"
+								class="ctaBtn2"
+							/>
+						</form>
+					</section>
+				</section>
+			</section>
+
+			<?php include "pr/partials/footer1.html";?>
+		</main>
+
+		<script src="pr/assets/js/signup.js" type="module"></script>
+	</body>
+</html>
+
