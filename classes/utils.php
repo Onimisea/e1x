@@ -5,10 +5,10 @@ require_once "config.php";
 class DB
 {
     // properties
-    private $dbh = DB_HOST;
-    private $dbu = DB_USERNAME;
-    private $dbp = DB_PASSWORD;
-    private $dbd = DB_DATABASE;
+    private $dbh = "localhost";
+    private $dbu = "e1x";
+    private $dbp = "e1x@demo.com";
+    private $dbd = "e1x";
 
     private $conn = null;
 
@@ -29,4 +29,20 @@ class DB
         }
         return $this->conn;
     }
+}
+
+function generateCode()
+{
+    $pin = "";
+
+    $pinChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    $pinCharArr = str_split($pinChars);
+
+    for ($i = 0; $i < 6; $i++) {
+        $randChar = array_rand($pinCharArr);
+        $pin .= $pinCharArr[$randChar];
+    }
+    $finalPin = "E1X" . $pin;
+
+    return $finalPin;
 }

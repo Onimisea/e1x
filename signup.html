@@ -43,10 +43,78 @@
 	</head>
 
 	<body>
-		<?php include "partials/sidebar1.html";?>
+		<aside class="sidebar" id="sidebar">
+  <ul class="nav-list">
+    <li><a href="index.html">
+      <i class="fa fa-home"></i>
+      <span class="links-name">Home</span>
+    </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class='bx bxs-info-circle'></i>
+        <span class="menuItem">About Us</span>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="bx bx-envelope"></i>
+        <span class="menuItem">Contact Us</span>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="fas fa-question-circle"></i>
+        <span class="menuItem">Frequently Asked Questions</span>
+      </a>
+    </li>
+  </section>
+</ul>
+
+<a href="#" class="sidebarBtn">
+  <span>VIEW ALL COURSES</span>
+</a>
+</aside>
 
 		<main>
-			<?php include "partials/header1.html";?>
+			<header class="header" id="header">
+      <section class="wrapper">
+        <section class="header_row header1">
+          <figure>
+            <img
+            class="logo"
+            id="logo"
+            src="assets/imgs/edoubleone-academy-logo.fw_.png"
+            alt="E-DoubleOne Academy Logo"
+            />
+          </figure>
+
+          <section class="emailTel">
+            <a href="mailto:info@e1xacademy.com">
+              <i class="bx bx-envelope"></i
+              ><span>info@e1xacademy.com</span></a
+            >
+
+            <a href="tel:+12409064083">
+              <i class="bx bx-phone-call"></i><span>+12409064083</span></a
+            >
+
+            <a href="#" class="socials"><i class="bx bxl-facebook-circle"></i></a>
+            <a href="#" class="socials"><i class='bx bxl-instagram'></i></a>
+            <a href="#" class="socials"><i class='bx bxl-linkedin-square'></i></a>
+          </section>
+
+          <section class="headerCta">
+            <a href="login.html"
+              ><i class="bx bx-user-circle"></i> <span>Login</span></a
+            >
+            <a href="signup.html" id=""><span>Sign Up</span></a>
+          </section>
+        </section>
+
+        <section class="header_row header2"></section>
+      </section>
+    </header>
 
 			<section class="body">
 				<section class="mainContent">
@@ -62,7 +130,7 @@
 
 						<section class="alertBox" id="alertBox"></section>
 
-						<form action="" method="post">
+						<form action="" method="post" id="regForm">
 							<label for="firstname">
 								<input
 									type="text"
@@ -169,8 +237,8 @@
 								<select name="country" id="country" required class="form-ctrl">
 									<option value="null">Choose Country</option>
 									<option value="Nigeria">Nigeria ($20)</option>
-									<option value="Others Countries">
-										Others Countries ($50)
+									<option value="Other Countries">
+										Other Countries ($50)
 									</option>
 								</select>
 							</label>
@@ -192,10 +260,74 @@
 				</section>
 			</section>
 
-			<?php include "pr/partials/footer1.html";?>
+			<footer>
+      <section class="wrapper">
+        <section class="sitemap">
+          <section class="item">
+            <h3>Other Pages</h3>
+            <ul>
+              <li>Home</li>
+              <li>About Us</li>
+              <li>Courses</li>
+              <li>Contact Us</li>
+              <li>Become an Affiliate</li>
+            </ul>
+          </section>
+          <section class="item">
+            <h3>Our Programs</h3>
+            <ul>
+              <li>Data/Business Analytics</li>
+              <li>Data Engineering</li>
+              <li>Data Modeling</li>
+              <li>Data Science</li>
+              <li>Data Visualization</li>
+            </ul>
+          </section>
+          <section class="item">
+            <h3>Quick Link</h3>
+            <ul>
+              <li>Privacy Policy</li>
+              <li>Terms & Conditions</li>
+              <li>Disclaimer</li>
+              <li>Credit</li>
+              <li>FAQ</li>
+            </ul>
+          </section>
+          <section class="item">
+            <h3>Contact Info</h3>
+            <ul>
+              <li><a href="#">
+                <i class="fa fa-home" aria-hidden="true"></i><span>16028 Elegant court, Bowie MD 20716</span></a></li>
+              <li><a href="mailto:info@e1xacademy.com">
+                <i class="bx bx-envelope"></i
+                ><span>info@e1xacademy.com</span></a></li>
+              <li><a href="tel:+12409064083">
+                <i class="bx bx-phone-call"></i><span>+12409064083</span></a></li>
+              <li class="footerSocial"><a href="#" class="socials"><i class="bx bxl-facebook-circle"></i></a>
+                <a href="#" class="socials"><i class='bx bxl-instagram'></i></a>
+                <a href="#" class="socials"><i class='bx bxl-linkedin-square'></i></a></li>
+            </ul>
+          </section>
+        </section>
+
+        <section class="copyright">
+          <figure>
+            <img
+            class="logo"
+            src="assets/imgs/edoubleone-academy-logo.fw_.png"
+            alt="E-DoubleOne Academy Logo"
+            />
+          </figure>
+
+          <p>
+            Copyrights &copy; E-DoubleOne Academy 2021, All Rights Reserved.
+          </p>
+        </section>
+      </section>
+    </footer>
 		</main>
 
-		<script src="pr/assets/js/signup.js" type="module"></script>
+		<script src="assets/js/signup.js" type="module"></script>
 	</body>
 </html>
 

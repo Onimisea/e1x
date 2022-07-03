@@ -41,6 +41,7 @@ const referralcode = document.getElementById("referral-code");
 const rewardprogram = document.getElementById("reward-program");
 const country = document.getElementById("country");
 const submit = document.getElementById("submit");
+const regForm = document.getElementById("regForm");
 
 submit.addEventListener("click", (e) => {
 	e.preventDefault();
@@ -72,10 +73,9 @@ submit.addEventListener("click", (e) => {
 		alertBox.style.display = "block";
 		alertBox.classList.remove("err");
 		alertBox.classList.add("suc");
-		alertBox.innerHTML = `registering...`;
+		alertBox.innerHTML = `Creating account...`;
 		document.documentElement.scrollTop = 0;
 		document.body.scrollTop = 0;
-		console.log("registering...");
 
 		const xhr = new XMLHttpRequest();
 		const fd = new FormData();
@@ -85,16 +85,45 @@ submit.addEventListener("click", (e) => {
 		fd.append("phone", phone.value);
 		fd.append("username", username.value);
 		fd.append("email", email.value);
-		fd.append("pwd", password.value);
+		fd.append("password", password.value);
+		fd.append("confirm-password", confirmpassword.value);
 		fd.append("refcode", referralcode.value);
 		fd.append("rewpro", rewardprogram.value);
 		fd.append("country", country.value);
 
-		xhr.open("POST", "pr/processes/register.php", true);
+		xhr.open("POST", "processes/register.php", true);
 		xhr.onload = function () {
 			if (xhr.status === 200) {
 				const res = xhr.responseText;
 				console.log(res);
+
+				if (
+					res.includes("Invalid") ||
+					res.includes("invalid") ||
+					res.includes("could not be") ||
+					res.includes("does not")
+				) {
+					alertBox.style.display = "block";
+					alertBox.classList.remove("suc");
+					alertBox.classList.add("err");
+					alertBox.innerHTML = `${res}`;
+					document.documentElement.scrollTop = 0;
+					document.body.scrollTop = 0;
+				} else {
+					alertBox.style.display = "block";
+					alertBox.classList.remove("err");
+					alertBox.classList.add("suc");
+					alertBox.innerHTML = `${res}`;
+					document.documentElement.scrollTop = 0;
+					document.body.scrollTop = 0;
+
+					// regForm.reset();
+
+					// setTimeout(() => {
+					// 	alertBox.style.display = "none";
+					// 	location.reload(true);
+					// }, 2000);
+				}
 			}
 		};
 
