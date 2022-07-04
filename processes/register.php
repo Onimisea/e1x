@@ -106,7 +106,7 @@ if ($error === 0 && $error2 === 0) {
     $chkEma = $usr->chkEmail($email);
 
     // echo $chkUsr;
-    echo $chkEma;
+    // echo $chkEma;
 
     // $userReg = $usr->insertData();
 
