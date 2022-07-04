@@ -1,11 +1,25 @@
 <?php
 
 // Database Credentials
-define('DB_TYPE', 'mysql');
-define('DB_HOST', 'localhost');
-define('DB_DATABASE', 'apr');
-define('DB_USERNAME', 'aprAdmin');
-define('DB_PASSWORD', 'apr@2022');
+if (!defined('DB_TYPE')) {
+  define('DB_TYPE', 'mysql');
+}
+
+if (!defined('DB_HOST')) {
+  define('DB_HOST', 'localhost');
+}
+
+if (!defined('DB_NAME')) {
+  define('DB_NAME', 'e1x');
+}
+
+if (!defined('DB_USER')) {
+  define('DB_USER', 'e1x');
+}
+
+if (!defined('DB_PASS')) {
+  define('DB_PASS', 'e1x@demo.com');
+}
 
 // Code we want to run on every page/script
 date_default_timezone_set('GMT');

@@ -40,18 +40,19 @@ if (!isset($_POST['fname']) || $_POST['fname'] == '' || strlen($_POST['fname']) 
 
 $error2;
 
-if ($_POST['refcode'] !== '') {
-    if (strlen($_POST['refcode']) !== 9 || !preg_match('/^(?=.*E1X|e1x)(?=.*[a-zA-Z0-9])/', $_POST['refcode'])) {
+if ($_POST['refby'] !== '') {
+    if (strlen($_POST['refby']) !== 9 || !preg_match('/^(?=.*E1X|e1x)(?=.*[a-zA-Z0-9])/', $_POST['refby'])) {
         echo "Invalid Referral Code";
         $error2 = 1;
     } else {
+        $refby = $_POST['refby'];
         $error2 = 0;
     }
 } else {
+    $refby = 'Nil';
     $error2 = 0;
 }
 
-$refcode = $_POST['refcode'];
 $fname = $_POST['fname'];
 $lname = $_POST['lname'];
 $phone = $_POST['phone'];
@@ -65,56 +66,94 @@ $pwd = password_hash($password, PASSWORD_DEFAULT);
 
 $comm = 0.45;
 $regfee;
-$perref;
+$perref = "45%";
+$earning;
 
 if ($country === "Nigeria") {
     $regfee = 20;
-    $perref = $comm * $regfee;
+    $earning = $comm * $regfee;
 }
 
 if ($country === "Other Countries") {
     $regfee = 50;
-    $perref = $comm * $regfee;
+    $earning = $comm * $regfee;
 }
+
+$total_referrals = 0;
+$total_earnings = 0;
 
 if ($error === 0 && $error2 === 0) {
     $newRefCode = generateCode();
 
-    function db_connect()
-    {
-        $dbh = "localhost";
-        $dbu = "e1x";
-        $dbp = "e1x@demo.com";
-        $dbd = "e1x";
+    $usr = new User();
 
-        $this->conn = new mysqli($this->dbh, $this->dbu, $this->dbp, $this->dbd);
+    $usr->setFirstname($fname);
+    $usr->setLastname($lname);
+    $usr->setEmail($email);
+    $usr->setUsername($username);
+    $usr->setPhone($phone);
+    $usr->setPassword($pwd);
+    $usr->setRefby($refby);
+    $usr->setRefcode($newRefCode);
+    $usr->setRewpro($rewpro);
+    $usr->setCountry($country);
+    $usr->setRegfee($regfee);
+    $usr->setPerref($perref);
+    $usr->setTotalReferrals($total_referrals);
+    $usr->setTotalEarnings($total_earnings);
 
-        if ($this->conn->connect_error) {
-            return "Failed to connect to database: " . connect_error();
-        }
-        return $this->conn;
-    }
+    $chkUsr = $usr->chkUsername($username);
+    $chkEma = $usr->chkEmail($email);
 
-    $conn = $db->db_connect();
+    // echo $chkUsr;
+    echo $chkEma;
 
-    echo $error;
-    echo $error2;
+    // $userReg = $usr->insertData();
 
-    echo $conn;
+    // if ($userReg === 1) {
+    //     echo "Registration successful. Login to your dashboard.";
+    // } else {
+    //     echo "Registration failed. Try again.";
+    // }
 
-    $tr = 0;
-    $te = 0;
+    // $host = "localhost";
+    // $user = "e1x";
+    // $pass = "e1x@demo.com";
+    // $name = "e1x";
 
-    $sql = "INSERT INTO `users`(`firstname`, `lastname`, `username`, `phone`, `email`, `password`, `country`, `reward_programme`, `reg_fee`, `per_ref`, `total_referrals`, `total_earnings`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    // $dsn = "mysql:host=$host;dbname=$name;charset=UTF8";
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ssssssssidid', $fname, $lname, $username, $phone, $email, $pwd, $country, $rewpro, $regfee, $perref, $tr, $te);
+    // try {
+    //     $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
-    if ($stmt->execute()) {
-        echo "Registration successful. Login to your dashboard.";
-    } else {
-        echo "Registration failed. Try again.";
-    }
+    //     if ($pdo) {
+    //         echo "Database connection successful via PDO";
+    //     }
+    // } catch (PDOException $e) {
+    //     echo $e->getMessage();
+    // }
 
-    $conn->close();
+    // $conn = $db->db_connect();
+
+    // echo $error;
+    // echo $error2;
+
+    // echo $conn;
+
+    // $tr = 0;
+    // $te = 0;
+
+    // $sql = "INSERT INTO `users`(`firstname`, `lastname`, `username`, `phone`, `email`, `password`, `country`, `reward_programme`, `reg_fee`, `per_ref`, `total_referrals`, `total_earnings`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    // $stmt = $conn->prepare($sql);
+    // $stmt->bind_param('ssssssssidid', $fname, $lname, $username, $phone, $email, $pwd, $country, $rewpro, $regfee, $perref, $tr, $te);
+
+    // if ($stmt->execute()) {
+    //     echo "Registration successful. Login to your dashboard.";
+    // } else {
+    //     echo "Registration failed. Try again.";
+    // }
+
+    // $conn->close();
+
 }

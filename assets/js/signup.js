@@ -37,11 +37,18 @@ const username = document.getElementById("username");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const confirmpassword = document.getElementById("confirm-password");
-const referralcode = document.getElementById("referral-code");
+const refby = document.getElementById("refby");
 const rewardprogram = document.getElementById("reward-program");
 const country = document.getElementById("country");
 const submit = document.getElementById("submit");
 const regForm = document.getElementById("regForm");
+
+// const csrf_meta_tag = document.querySelector('meta[name="csrf_token"]');
+// var csrfToken;
+
+// if (csrf_meta_tag) {
+// 	csrfToken = csrf_meta_tag.getAttribute("content");
+// }
 
 submit.addEventListener("click", (e) => {
 	e.preventDefault();
@@ -87,7 +94,7 @@ submit.addEventListener("click", (e) => {
 		fd.append("email", email.value);
 		fd.append("password", password.value);
 		fd.append("confirm-password", confirmpassword.value);
-		fd.append("refcode", referralcode.value);
+		fd.append("refby", refby.value);
 		fd.append("rewpro", rewardprogram.value);
 		fd.append("country", country.value);
 
