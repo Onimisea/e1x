@@ -1,8 +1,9 @@
 let navToggle = document.getElementById("logo");
 let sidebar = document.getElementById("sidebar");
+let alertBox = document.getElementById("alertBox");
 
 navToggle.addEventListener("click", () => {
-  sidebar.classList.toggle("open");
+	sidebar.classList.toggle("open");
 });
 
 /*

@@ -23,7 +23,7 @@ if (!isset($_POST['fname']) || $_POST['fname'] == '' || strlen($_POST['fname']) 
     echo "Email could not be verified";
     $error = 1;
 } else if (!isset($_POST['password']) || $_POST['password'] == '' || !preg_match('/(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[<>,.;\'":\{\}\[\]\/=\*\-_()&\^%\$#!|@~`])(?=.{6,})/', $_POST['password'])) {
-    echo "Invalid password";
+    echo "Password must contain an uppercase, lowercase, number and a symbol. It must be more than 7 characters";
     $error = 1;
 } else if (!isset($_POST['confirm-password']) || $_POST['confirm-password'] !== $_POST['password']) {
     echo "Password does not match";
@@ -103,57 +103,39 @@ if ($error === 0 && $error2 === 0) {
     $usr->setTotalEarnings($total_earnings);
 
     $chkUsr = $usr->chkUsername($username);
-    $chkEma = $usr->chkEmail($email);
 
-    // echo $chkUsr;
-    // echo $chkEma;
+    if ($chkUsr > 0) {
+        echo $username . " already registered";
+    } else {
+        $chkEma = $usr->chkEmail($email);
+        if ($chkEma > 0) {
+            echo $email . " already registered";
+        } else {
+            if ($refby !== '' && $refby !== 'Nil') {
+                $chkRefby = $usr->chkRefby($refby);
+                if ($chkRefby > 0) {
+                    $userReg = $usr->insertData();
 
-    // $userReg = $usr->insertData();
+                    if ($userReg === 1) {
+                        echo "Registration successful. Login to your dashboard.";
 
-    // if ($userReg === 1) {
-    //     echo "Registration successful. Login to your dashboard.";
-    // } else {
-    //     echo "Registration failed. Try again.";
-    // }
+                        $usr->payReferrer();
+                    } else {
+                        echo "Registration failed. Try again.";
+                    }
+                } else {
+                    echo "Invalid referral code - " . $refby;
+                }
+            } else {
+                $userReg = $usr->insertData();
 
-    // $host = "localhost";
-    // $user = "e1x";
-    // $pass = "e1x@demo.com";
-    // $name = "e1x";
-
-    // $dsn = "mysql:host=$host;dbname=$name;charset=UTF8";
-
-    // try {
-    //     $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-
-    //     if ($pdo) {
-    //         echo "Database connection successful via PDO";
-    //     }
-    // } catch (PDOException $e) {
-    //     echo $e->getMessage();
-    // }
-
-    // $conn = $db->db_connect();
-
-    // echo $error;
-    // echo $error2;
-
-    // echo $conn;
-
-    // $tr = 0;
-    // $te = 0;
-
-    // $sql = "INSERT INTO `users`(`firstname`, `lastname`, `username`, `phone`, `email`, `password`, `country`, `reward_programme`, `reg_fee`, `per_ref`, `total_referrals`, `total_earnings`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-    // $stmt = $conn->prepare($sql);
-    // $stmt->bind_param('ssssssssidid', $fname, $lname, $username, $phone, $email, $pwd, $country, $rewpro, $regfee, $perref, $tr, $te);
-
-    // if ($stmt->execute()) {
-    //     echo "Registration successful. Login to your dashboard.";
-    // } else {
-    //     echo "Registration failed. Try again.";
-    // }
-
-    // $conn->close();
+                if ($userReg === 1) {
+                    echo "Registration successful. Login to your dashboard.";
+                } else {
+                    echo "Registration failed. Try again.";
+                }
+            }
+        }
+    }
 
 }

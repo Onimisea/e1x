@@ -1,10 +1,9 @@
 import "./general.js";
 
 const spi = document.getElementById("spi");
+const pwd = document.getElementById("password");
 
 spi.addEventListener("click", () => {
-	const pwd = document.getElementById("password");
-
 	if (pwd.type === "password") {
 		spi.classList.add("fa-eye");
 		spi.classList.remove("fa-low-vision");
@@ -16,30 +15,72 @@ spi.addEventListener("click", () => {
 	}
 });
 
-// let username = document.getElementById("username");
-// let usernameLabel = document.getElementById("username-label");
-// let password = document.getElementById("password");
-// let passwordLabel = document.getElementById("password-label");
+const usrema = document.getElementById("usrema");
+const password = document.getElementById("password");
+const loginForm = document.getElementById("loginForm");
 
-// username.addEventListener("input", () => {
-// 	if (username.value !== "") {
-// 		usernameLabel.style.opacity = 1;
-// 		username.style.borderBottom = "4px solid rgba(23, 48, 88, 0.7)";
-// 	} else {
-// 		usernameLabel.style.opacity = 0;
-// 		username.style.borderBottom = "2px solid rgba(23, 48, 88, 0.5)";
-// 	}
-// });
+submit.addEventListener("click", (e) => {
+	e.preventDefault();
+	if (usrema.value == "" || password.value == "") {
+		alertBox.style.display = "block";
+		alertBox.classList.remove("suc");
+		alertBox.classList.add("err");
+		alertBox.innerHTML = `All fields are REQUIRED!`;
+		document.documentElement.scrollTop = 0;
+		document.body.scrollTop = 0;
+	} else {
+		alertBox.style.display = "block";
+		alertBox.classList.remove("err");
+		alertBox.classList.add("suc");
+		alertBox.innerHTML = `Logging in...`;
+		document.documentElement.scrollTop = 0;
+		document.body.scrollTop = 0;
 
-// password.addEventListener("input", () => {
-// 	if (password.value !== "") {
-// 		passwordLabel.style.opacity = 1;
-// 		password.style.borderBottom = "4px solid rgba(23, 48, 88, 0.7)";
-// 	} else {
-// 		passwordLabel.style.opacity = 0;
-// 		password.style.borderBottom = "2px solid rgba(23, 48, 88, 0.5)";
-// 	}
-// });
+		const xhr = new XMLHttpRequest();
+		const fd = new FormData();
+
+		fd.append("usrema", usrema.value);
+		fd.append("password", password.value);
+
+		xhr.open("POST", "processes/login.php", true);
+		xhr.onload = function () {
+			if (xhr.status === 200) {
+				const res = xhr.responseText;
+				console.log(res);
+
+				if (
+					res.includes("Invalid") ||
+					res.includes("invalid") ||
+					res.includes("could not be") ||
+					res.includes("does not") ||
+					res.includes("already")
+				) {
+					alertBox.style.display = "block";
+					alertBox.classList.remove("suc");
+					alertBox.classList.add("err");
+					alertBox.innerHTML = `${res}`;
+					document.documentElement.scrollTop = 0;
+					document.body.scrollTop = 0;
+				} else {
+					alertBox.style.display = "block";
+					alertBox.classList.remove("err");
+					alertBox.classList.add("suc");
+					alertBox.innerHTML = `${res}`;
+					document.documentElement.scrollTop = 0;
+					document.body.scrollTop = 0;
+
+					// loginForm.reset();
+
+					setTimeout(() => {
+						alertBox.style.display = "none";
+					}, 2000);
+				}
+			}
+		};
+
+		xhr.send(fd);
+	}
+});
 
 // let submit = document.getElementById("submit");
 

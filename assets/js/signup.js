@@ -108,7 +108,8 @@ submit.addEventListener("click", (e) => {
 					res.includes("Invalid") ||
 					res.includes("invalid") ||
 					res.includes("could not be") ||
-					res.includes("does not")
+					res.includes("does not") ||
+					res.includes("already")
 				) {
 					alertBox.style.display = "block";
 					alertBox.classList.remove("suc");
@@ -124,12 +125,11 @@ submit.addEventListener("click", (e) => {
 					document.documentElement.scrollTop = 0;
 					document.body.scrollTop = 0;
 
-					// regForm.reset();
+					regForm.reset();
 
-					// setTimeout(() => {
-					// 	alertBox.style.display = "none";
-					// 	location.reload(true);
-					// }, 2000);
+					setTimeout(() => {
+						alertBox.style.display = "none";
+					}, 2000);
 				}
 			}
 		};
