@@ -371,6 +371,93 @@ class User
             }
         }
     }
+
+    public function getRefBox()
+    {
+        $username = $_SESSION['username'];
+
+        $stm = $this->dbCnx->prepare("SELECT `referred_by` FROM `users` WHERE `username` = ?");
+        $stm->execute([$username]);
+
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
+
+        if ($row === false) {
+            echo "Error";
+        } else {
+            // $_SESSION["username"] = $row["username"];
+            $usrnRefby = $row['referred_by'];
+
+            if ($usrnRefby !== 'Nil') {
+                $stm2 = $this->dbCnx->prepare("SELECT `username` FROM `users` WHERE `referral_code` = ?");
+                $stm2->execute([$usrnRefby]);
+
+                $row2 = $stm2->fetch(PDO::FETCH_ASSOC);
+
+                if ($row2 === false) {
+                    echo "Error";
+                } else {
+                    return $row2['username'];
+                }
+            } else {
+                return 'Nil';
+            }
+        }
+    }
+
+    public function getDashcards()
+    {
+        $username = $_SESSION['username'];
+
+        $stm = $this->dbCnx->prepare("SELECT * FROM `users` WHERE `username` = ?");
+        $stm->execute([$username]);
+
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
+
+        if ($row === false) {
+            echo "Error";
+        } else {
+            echo "<section class='card-single'><h1 class='cardHead'>" . number_format($row['total_referrals']) . "</h1><span>Total Referrals</span></section>";
+
+            echo "<section class='card-single'><h1 class='cardHead'>$" . number_format($row['total_earnings']) . "</h1><span>Total Earnings</span></section>";
+
+            echo "<section class='card-single'><h1 class='cardHead'>" . $row['per_ref'] . "</h1><span>Per Referral</span></section>";
+
+            echo "<section class='card-single'><h1 class='cardHead'>$" . number_format($row['reg_fee']) . "</h1><span>Registration Fee</span></section>";
+        }
+    }
+
+    public function getDashTable()
+    {
+        $username = $_SESSION['username'];
+
+        $stm = $this->dbCnx->prepare("SELECT `referral_code` FROM `users` WHERE `username` = ?");
+        $stm->execute([$username]);
+
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
+
+        if ($row === false) {
+            echo "Error";
+        } else {
+            $rrefcode = $row['referral_code'];
+
+            $stm2 = $this->dbCnx->prepare("SELECT * FROM `users` WHERE `referred_by` = ? ORDER BY `total_earnings` DESC LIMIT 5");
+            $stm2->execute([$rrefcode]);
+
+            echo "<section class='tableWrapper'><table class='table'>
+                <tr>
+                  <th>Username</th>
+                  <th>Total Referrals</th>
+                  <th>Total Earnings</th>
+                  <th>Referral Code</th>
+                </tr>";
+
+            while ($row2 = $stm2->fetch(PDO::FETCH_ASSOC)) {
+                echo "<tr><td>" . $row2['username'] . "</td><td>" . $row2['total_referrals'] . "</td><td>" . $row2['total_earnings'] . "</td><td>" . $row2['referral_code'] . "</td></tr>";
+            }
+
+            echo "</table></section>";
+        }
+    }
 }
 
 function generateCode()
